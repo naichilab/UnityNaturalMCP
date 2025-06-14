@@ -12,6 +12,10 @@ Unity C#で定義したMCPツールを、ダイレクトにClaudeCodeやCursor�
 - [MCP C# SDK](https://github.com/modelcontextprotocol/csharp-sdk)を用いた、C#で完結する拡張MCPツールの実装
 - ClaudeCode対応
 
+## Requirements
+- Unity 6000.0
+- Node.js 18.0.0 or later
+
 ## Architecture
 ```mermaid
 graph LR
@@ -39,10 +43,6 @@ stdioの入力をStreamable HTTPにバイパスすることで、UnityNaturalMCP
 
 - **RefreshAssets**: Unity Editorのアセットを更新
 - **GetLogHistory**: Unity Consoleのログ履歴を取得
-
-## Requirements
-- Unity 6000.0
-- Node.js 18.0.0 or later
 
 ## Installation
 

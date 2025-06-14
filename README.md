@@ -12,6 +12,10 @@ MCP tools defined in Unity C# can be directly used from MCP clients such as Clau
 - Implementation of extended MCP tool entirely written in C# using [MCP C# SDK](https://github.com/modelcontextprotocol/csharp-sdk)
 - ClaudeCode support
 
+## Requirements
+- Unity 6000.0
+- Node.js 18.0.0 or later
+
 ## Architecture
 ```mermaid
 graph LR
@@ -39,10 +43,6 @@ Currently, the following MCP tools are implemented:
 
 - **RefreshAssets**: Refresh Unity Editor assets
 - **GetLogHistory**: Get Unity Console log history
-
-## Requirements
-- Unity 6000.0
-- Node.js 18.0.0 or later
 
 ## Installation
 
