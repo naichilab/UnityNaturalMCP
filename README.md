@@ -109,7 +109,7 @@ In mirror mode, you can communicate between WSL2 and the host OS via localhost.
 
 However, when the C# server binds to localhost, it may not work as expected and connections may fail.
 
-To work around this, set the IP Address to `*` in Unity's `Edit Preferences > Unity Natrual MCP` and execute `Refresh`.
+To work around this, set the IP Address to `*` in Unity's `Edit Preferences > Unity Natural MCP` and execute `Refresh`.
 
 > [!CAUTION]
 > From a security perspective, specifying `*` for the IP Address is not normally recommended.
@@ -170,7 +170,7 @@ public class MyCustomMCPToolBuilder : McpBuilderScriptableObject
 ### 3. Create ScriptableObject
 1. Right-click in the project window in Unity Editor
 2. Select `Create > UnityNaturalMCP > My Custom Tool Builder`
-3. From `Edit > Preferences > Unity Natrual MCP > Refresh`, restart the MCP server to load the created tools.
+3. From `Edit > Preferences > Unity Natural MCP > Refresh`, restart the MCP server to load the created tools.
 
 ## License
 

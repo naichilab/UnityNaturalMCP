@@ -107,7 +107,7 @@ networkingMode=mirrored
 
 しかしながら、C#サーバー側でlocalhostにバインドした場合、期待通りに動作せず、接続が失敗する場合があります。
 
-これを回避するためには、Unityの`Edit > Preferences > Unity Natrual MCP`より、IPAddressを`*`に設定し、`Refresh`を実行します。
+これを回避するためには、Unityの`Edit > Preferences > Unity Natural MCP`より、IPAddressを`*`に設定し、`Refresh`を実行します。
 
 > [!CAUTION]
 > セキュリティ上の観点から、IP Addressに`*`を指定することは本来推奨されません。
@@ -168,7 +168,7 @@ public class MyCustomMCPToolBuilder : McpBuilderScriptableObject
 ### 3. ScriptableObjectの作成
 1. Unity Editorでプロジェクトウィンドウを右クリック
 2. `Create > UnityNaturalMCP > My Custom Tool Builder` を選択
-3. `Edit > Preferences > Unity Natrual MCP > Refresh` から、MCPサーバーを再起動すると、作成したツールが読み込まれます。
+3. `Edit > Preferences > Unity Natural MCP > Refresh` から、MCPサーバーを再起動すると、作成したツールが読み込まれます。
 
 ## ライセンス
 
