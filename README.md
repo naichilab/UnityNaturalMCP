@@ -77,7 +77,7 @@ You can install via UPM (Unity Package Manager):
 ### Claude Code
 Clone the repository and use the following command to register an MCP server with ClaudeCode.
 
-Replace path/to with the path to the cloned stdio-to-streamable-http.
+Please replace path/to with the path to the cloned stdio-to-streamable-http.
 
 ```shell
 claude mcp add-json unity-natural-mcp -s project '{
