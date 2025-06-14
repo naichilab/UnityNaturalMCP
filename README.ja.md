@@ -49,7 +49,8 @@ Node.jsで実装された、MCPクライアントとUnity間の通信を中継�
 現在、次のMCPツールが実装されています。
 
 - **RefreshAssets**: Unity Editorのアセットを更新
-- **GetLogHistory**: Unity Consoleのログ履歴を取得
+- **GetCurrentConsoleLogs**: Unity Consoleのログを取得
+- **ClearConsoleLogs**: Unity Consoleのログをクリア
 
 ## Installation
 
