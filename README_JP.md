@@ -38,7 +38,7 @@ stdioの入力をStreamable HTTPにバイパスすることで、UnityNaturalMCP
 現在、次のMCPツールが実装されています。
 
 - **RefreshAssets**: Unity Editorのアセットを更新
-- **GetLogHistory**: Unity Consoleのログ履歴を取得（指定行数）
+- **GetLogHistory**: Unity Consoleのログ履歴を取得
 
 ## Requirements
 - Unity 6000.0
