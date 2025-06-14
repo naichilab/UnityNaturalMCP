@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Editor
 {
-    [McpServerToolType, Description("Example MCP tool for Unity Flux MCP.")]
+    [McpServerToolType, Description("Example MCP tool for Unity Natural MCP.")]
     internal sealed class ExampleMCPTool : MonoBehaviour
     {
         [McpServerTool, Description("Retrurns \"Hello World!\" message.")]

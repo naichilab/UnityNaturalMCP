@@ -140,7 +140,7 @@ server.setRequestHandler(
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("Unity Flux MCP Server running on stdio");
+  console.error("MCP Server running on stdio");
 }
 
 main().catch((error) => {

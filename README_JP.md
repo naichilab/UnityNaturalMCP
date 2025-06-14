@@ -68,7 +68,7 @@ UPM(Unity Package Manager)を介してインストールできます。
   ```
 
 ### Initial Setup
-1. Unity Editorで`Edit > Project Settings > Unity Natural MCP`を開く
+1. Unity Editorで`Edit > Preferences > Unity Natural MCP`を開く
 2. MCPサーバーのポート番号を設定（デフォルト: 8090）
 3. `Refresh` ボタンをクリックして設定を反映
 
@@ -78,7 +78,7 @@ RepositoryをCloneし、`node`に`stdio-to-streamable-http/src/index.js`を渡�
 ```
 {
   "mcpServers": {
-    "unity-flux-mcp": {
+    "unity-natural-mcp": {
       "command": "node",
       "args": ["path/to/stdio-to-streamable-http/src/index.js"],
       "env": {
@@ -107,7 +107,7 @@ networkingMode=mirrored
 
 しかしながら、C#サーバー側でlocalhostにバインドした場合、期待通りに動作せず、接続が失敗する場合があります。
 
-これを回避するためには、Unityの`Preferences > Unity Flux MCP`より、IPAddressを`*`に設定し、`Refresh`を実行します。
+これを回避するためには、Unityの`Edit > Preferences > Unity Natural MCP`より、IPAddressを`*`に設定し、`Refresh`を実行します。
 
 > [!CAUTION]
 > セキュリティ上の観点から、IP Addressに`*`を指定することは本来推奨されません。
@@ -120,7 +120,7 @@ networkingMode=mirrored
 UnityNaturalMCPでは、[ModelProtocolContext C#SDK](https://github.com/modelcontextprotocol/csharp-sdk)を用いて、C#でMCPツールを実装することができます。
 ```csharp
 using UnityEngine;
-using UnityFluxMCP.Editor.Attributes;
+using UnityNaturalMCP.Editor.Attributes;
 using System.ComponentModel;
 
 [McpServerToolType, Description("カスタムMCPツールの説明")]
@@ -151,10 +151,10 @@ public async UniTask<string> AsyncMethod()
 MCPツールをMCPサーバーに登録するためには、`McpBuilderScriptableObject`を継承したクラスを作成します。
 ```csharp
 using UnityEngine;
-using UnityFluxMCP.Editor;
+using UnityNaturalMCP.Editor;
 
 [CreateAssetMenu(fileName = "MyCustomMCPToolBuilder", 
-                 menuName = "UnityFluxMCP/My Custom Tool Builder")]
+                 menuName = "UnityNaturalMCP/My Custom Tool Builder")]
 public class MyCustomMCPToolBuilder : McpBuilderScriptableObject
 {
     public override void Build(IMcpServerBuilder builder)
@@ -167,8 +167,8 @@ public class MyCustomMCPToolBuilder : McpBuilderScriptableObject
 
 ### 3. ScriptableObjectの作成
 1. Unity Editorでプロジェクトウィンドウを右クリック
-2. `Create > UnityFluxMCP > My Custom Tool Builder` を選択
-3. `Preferences > Unity Flux MCP > Refresh` から、MCPサーバーを再起動すると、作成したツールが読み込まれます。
+2. `Create > UnityNaturalMCP > My Custom Tool Builder` を選択
+3. `Edit > Preferences > Unity Natural MCP > Refresh` から、MCPサーバーを再起動すると、作成したツールが読み込まれます。
 
 ## ライセンス
 

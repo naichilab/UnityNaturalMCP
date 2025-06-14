@@ -1,8 +1,8 @@
 ﻿using UnityEditor;
 
-namespace UnityFluxMCP.Editor
+namespace UnityNaturalMCP.Editor
 {
-    [FilePath("UnityFluxMcpPreferences.asset", FilePathAttribute.Location.PreferencesFolder)]
+    [FilePath("UnityNaturalMCPPreferences.asset", FilePathAttribute.Location.PreferencesFolder)]
     public class McpPreference : ScriptableSingleton<McpPreference>
     {
         public string ipAddress = "localhost";

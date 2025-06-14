@@ -68,7 +68,7 @@ You can install via UPM (Unity Package Manager):
   ```
 
 #### Initial Setup
-1. Open `Edit > Project Settings > Unity Natural MCP` in Unity Editor
+1. Open `Edit > Preferences > Unity Natural MCP` in Unity Editor
 2. Set the MCP server port number (default: 8090)
 3. Click the `Refresh` button to apply the settings
 
@@ -80,7 +80,7 @@ You can specify the destination IP address and port through the `MCP_SERVER_IP` 
 ```
 {
   "mcpServers": {
-    "unity-flux-mcp": {
+    "unity-natural-mcp": {
       "command": "node",
       "args": ["path/to/stdio-to-streamable-http/src/index.js"],
       "env": {
@@ -109,7 +109,7 @@ In mirror mode, you can communicate between WSL2 and the host OS via localhost.
 
 However, when the C# server binds to localhost, it may not work as expected and connections may fail.
 
-To work around this, set the IP Address to `*` in Unity's `Preferences > Unity Flux MCP` and execute `Refresh`.
+To work around this, set the IP Address to `*` in Unity's `Edit Preferences > Unity Natural MCP` and execute `Refresh`.
 
 > [!CAUTION]
 > From a security perspective, specifying `*` for the IP Address is not normally recommended.
@@ -122,7 +122,7 @@ To work around this, set the IP Address to `*` in Unity's `Preferences > Unity F
 In UnityNaturalMCP, you can implement MCP tools in C# using the [ModelProtocolContext C# SDK](https://github.com/modelcontextprotocol/csharp-sdk).
 ```csharp
 using UnityEngine;
-using UnityFluxMCP.Editor.Attributes;
+using UnityNaturalMCP.Editor.Attributes;
 using System.ComponentModel;
 
 [McpServerToolType, Description("Description of custom MCP tool")]
@@ -153,10 +153,10 @@ public async UniTask<string> AsyncMethod()
 To register MCP tools with the MCP server, create a class that inherits from `McpBuilderScriptableObject`.
 ```csharp
 using UnityEngine;
-using UnityFluxMCP.Editor;
+using UnityNaturalMCP.Editor;
 
 [CreateAssetMenu(fileName = "MyCustomMCPToolBuilder", 
-                 menuName = "UnityFluxMCP/My Custom Tool Builder")]
+                 menuName = "UnityNaturalMCP/My Custom Tool Builder")]
 public class MyCustomMCPToolBuilder : McpBuilderScriptableObject
 {
     public override void Build(IMcpServerBuilder builder)
@@ -169,8 +169,8 @@ public class MyCustomMCPToolBuilder : McpBuilderScriptableObject
 
 ### 3. Create ScriptableObject
 1. Right-click in the project window in Unity Editor
-2. Select `Create > UnityFluxMCP > My Custom Tool Builder`
-3. From `Preferences > Unity Flux MCP > Refresh`, restart the MCP server to load the created tools.
+2. Select `Create > UnityNaturalMCP > My Custom Tool Builder`
+3. From `Edit > Preferences > Unity Natural MCP > Refresh`, restart the MCP server to load the created tools.
 
 ## License
 

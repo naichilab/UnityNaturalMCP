@@ -1,6 +1,6 @@
 {
-    "name": "UnityFluxMCP.Editor",
-    "rootNamespace": "UnityFluxMCP.Editor",
+    "name": "UnityNaturalMCP.Editor",
+    "rootNamespace": "UnityNaturalMCP.Editor",
     "references": [
         "UniTask"
     ],
