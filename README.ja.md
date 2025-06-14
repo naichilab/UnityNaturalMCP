@@ -78,11 +78,13 @@ UPM(Unity Package Manager)を介してインストールできます。
 RepositoryをCloneし、`node`に`stdio-to-streamable-http/src/index.js`を渡してサーバーを起動します。
 
 次のコマンドを利用して、ClaudeCodeにMCPサーバーを登録します。
+
+`path/to` は、Cloneした `stdio-to-streamable-http` のパスに置き換えてください。
 ```shell
 claude mcp add-json unity-natural-mcp -s project '{
   "type":"stdio",
   "command": "npm",
-  "args": ["start", "--prefix", "../stdio-to-streamable-http/"],
+  "args": ["start", "--prefix", "path/to/stdio-to-streamable-http/"],
   "env": {
     "MCP_SERVER_IP": "localhost",
     "MCP_SERVER_PORT": "8090"

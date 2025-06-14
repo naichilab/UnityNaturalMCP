@@ -80,11 +80,14 @@ Clone the repository and start the server by passing `stdio-to-streamable-http/s
 You can specify the destination IP address and port through the `MCP_SERVER_IP` and `MCP_SERVER_PORT` environment variables.
 
 Use the following command to register an MCP server with ClaudeCode.
+
+Replace path/to with the path to the cloned stdio-to-streamable-http.
+
 ```shell
 claude mcp add-json unity-natural-mcp -s project '{
   "type":"stdio",
   "command": "npm",
-  "args": ["start", "--prefix", "../stdio-to-streamable-http/"],
+  "args": ["start", "--prefix", "path/to/stdio-to-streamable-http/"],
   "env": {
     "MCP_SERVER_IP": "localhost",
     "MCP_SERVER_PORT": "8090"
