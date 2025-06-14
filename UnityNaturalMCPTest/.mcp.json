@@ -1,8 +1,13 @@
 {
   "mcpServers": {
     "unity-natural-mcp": {
-      "command": "node",
-      "args": ["../stdio-to-streamable-http/src/index.js"],
+      "type": "stdio",
+      "command": "npm",
+      "args": [
+        "start",
+        "--prefix",
+        "../stdio-to-streamable-http/"
+      ],
       "env": {
         "MCP_SERVER_IP": "localhost",
         "MCP_SERVER_PORT": "8090"
