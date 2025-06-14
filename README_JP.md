@@ -64,7 +64,7 @@ UPM(Unity Package Manager)を介してインストールできます。
 - `Packages/manifest.json` を編集
 - `dependencies` セクションに以下を追加：
   ```json
-  "jp.notargs.unity-natural-mcp": "https://github.com/notargs/UnityNaturalMCP.git?path=/UnityNaturalMCPServer#0.1.0"
+  "jp.notargs.unity-natural-mcp": "https://github.com/notargs/UnityNaturalMCP.git?path=/UnityNaturalMCPServer"
   ```
 
 ### Initial Setup

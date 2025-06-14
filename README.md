@@ -64,7 +64,7 @@ You can install via UPM (Unity Package Manager):
 - Edit `Packages/manifest.json`
 - Add the following to the `dependencies` section:
   ```json
-  "jp.notargs.unity-natural-mcp": "https://github.com/notargs/UnityNaturalMCP.git?path=/UnityNaturalMCPServer#0.1.0"
+  "jp.notargs.unity-natural-mcp": "https://github.com/notargs/UnityNaturalMCP.git?path=/UnityNaturalMCPServer"
   ```
 
 #### Initial Setup
