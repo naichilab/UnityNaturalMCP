@@ -38,7 +38,7 @@ A Unity project for functional verification and as a sample.
 Currently, the following MCP tools are implemented:
 
 - **RefreshAssets**: Refresh Unity Editor assets
-- **GetLogHistory**: Get Unity Console log history (specified number of lines)
+- **GetLogHistory**: Get Unity Console log history
 
 ## Requirements
 - Unity 6000.0
