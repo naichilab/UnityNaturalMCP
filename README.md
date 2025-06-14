@@ -19,21 +19,28 @@ MCP tools defined in Unity C# can be used directly from MCP clients such as Clau
 ## Architecture
 ```mermaid
 graph LR
+A[MCP Client] ---|Streamable HTTP| C[UnityNaturalMCPServer]
+```
+
+or
+
+```mermaid
+graph LR
 A[MCP Client] ---|stdio| B[stdio-to-streamable-http]
 B ---|Streamable HTTP| C[UnityNaturalMCPServer]
 ```
 
 ### UnityNaturalMCPServer
-An MCP server implementation provided as a Unity Package that behaves as a Streamable HTTP server.
+An MCP server implementation provided as a Unity Package that behaves as a `Streamable HTTP` server.
 
-Streamable HTTP-compatible clients can communicate with Unity Editor through this server alone.
+Clients that support `Streamable HTTP`, such as `Github Copilot + VSCode`, can communicate directly with Unity Editor through this server.
 
 ### stdio-to-streamable-http
 A Node.js-based stdio MCP server that relays communication between MCP clients and Unity.
 
-Some MCP clients, such as ClaudeCode, do not support Streamable HTTP.
+Some MCP clients, such as `ClaudeCode`, do not support `Streamable HTTP` as of June 15, 2025.
 
-By bypassing stdio input to Streamable HTTP, it enables communication between UnityNaturalMCPServer and MCP clients.
+By bypassing stdio input to `Streamable HTTP`, it enables communication between `UnityNaturalMCPServer` and MCP clients.
 
 ### UnityNaturalMCPTest
 A Unity project for functional verification and as a sample.
