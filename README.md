@@ -68,7 +68,7 @@ You can install via UPM (Unity Package Manager):
   ```
 
 #### Initial Setup
-1. Open `Edit > Project Settings > Unity Natural MCP` in Unity Editor
+1. Open `Edit > Preferences > Unity Natural MCP` in Unity Editor
 2. Set the MCP server port number (default: 8090)
 3. Click the `Refresh` button to apply the settings
 
@@ -109,7 +109,7 @@ In mirror mode, you can communicate between WSL2 and the host OS via localhost.
 
 However, when the C# server binds to localhost, it may not work as expected and connections may fail.
 
-To work around this, set the IP Address to `*` in Unity's `Preferences > Unity Flux MCP` and execute `Refresh`.
+To work around this, set the IP Address to `*` in Unity's `Edit Preferences > Unity Flux MCP` and execute `Refresh`.
 
 > [!CAUTION]
 > From a security perspective, specifying `*` for the IP Address is not normally recommended.
@@ -170,7 +170,7 @@ public class MyCustomMCPToolBuilder : McpBuilderScriptableObject
 ### 3. Create ScriptableObject
 1. Right-click in the project window in Unity Editor
 2. Select `Create > UnityFluxMCP > My Custom Tool Builder`
-3. From `Preferences > Unity Flux MCP > Refresh`, restart the MCP server to load the created tools.
+3. From `Edit > Preferences > Unity Flux MCP > Refresh`, restart the MCP server to load the created tools.
 
 ## License
 
