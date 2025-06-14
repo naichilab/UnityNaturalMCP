@@ -38,7 +38,7 @@ namespace UnityNaturalMCP.Editor.McpTools
             [Description("Filter by regex. If empty, all logs are returned.")]
             string filter = "",
             [Description("Log count limit. Set to 0 for no limit(Not recommended).")]
-            int maxCount = 10,
+            int maxCount = 20,
             [Description("Get only first line of the log message. If false, the whole message is returned.(To save tokens, recommend calling this with true.)")]
             bool onlyFirstLine = true,
             [Description(
