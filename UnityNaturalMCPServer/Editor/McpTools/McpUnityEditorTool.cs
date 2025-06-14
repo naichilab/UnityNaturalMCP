@@ -34,9 +34,6 @@ namespace UnityNaturalMCP.Editor.McpTools
             [System.ComponentModel.Description(
                 "Filter logs by type. Valid values: \"\"(Maches all logs), \"error\", \"warning\", \"log\", \"compile-error\"(This is all you need to check for compilation errors.), \"compile-warning\"")]
             string logType = "",
-            [System.ComponentModel.Description(
-                "Include stack trace in the log entries. Recommended is false.(Recommend using a filter to set this to true only if you want to investigate further.)")]
-            bool includeStackTrace = false,
             [System.ComponentModel.Description("Filter by regex. If empty, all logs are returned.")]
             string filter = "",
             [System.ComponentModel.Description("Log count limit. Set to 0 for no limit(Not recommended).")]
@@ -78,7 +75,7 @@ namespace UnityNaturalMCP.Editor.McpTools
                     if ((string.IsNullOrEmpty(logTypeToLower) || logTypeValue.Equals(logTypeToLower))
                         && (string.IsNullOrEmpty(filter) || Regex.IsMatch(message, filter)))
                     {
-                        logs.Add(new LogEntry(message, includeStackTrace ? file : "", logTypeValue));
+                        logs.Add(new LogEntry(message, logTypeValue));
                     }
                 }
 
