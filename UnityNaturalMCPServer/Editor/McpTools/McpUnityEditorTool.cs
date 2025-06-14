@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -11,10 +12,10 @@ using Assert = UnityEngine.Assertions.Assert;
 
 namespace UnityNaturalMCP.Editor.McpTools
 {
-    [McpServerToolType, System.ComponentModel.Description("Control Unity Editor tools")]
+    [McpServerToolType, Description("Control Unity Editor tools")]
     internal sealed class McpUnityEditorTool
     {
-        [McpServerTool, System.ComponentModel.Description("Execute AssetDatabase.Refresh")]
+        [McpServerTool, Description("Execute AssetDatabase.Refresh")]
         public async UniTask RefreshAssets()
         {
             try
@@ -29,16 +30,18 @@ namespace UnityNaturalMCP.Editor.McpTools
             }
         }
 
-        [McpServerTool, System.ComponentModel.Description("Get current console logs. Recommend calling ClearConsoleLogs beforehand.")]
+        [McpServerTool, Description("Get current console logs. Recommend calling ClearConsoleLogs beforehand.")]
         public async Task<IReadOnlyList<LogEntry>> GetCurrentConsoleLogs(
-            [System.ComponentModel.Description(
+            [Description(
                 "Filter logs by type. Valid values: \"\"(Maches all logs), \"error\", \"warning\", \"log\", \"compile-error\"(This is all you need to check for compilation errors.), \"compile-warning\"")]
             string logType = "",
-            [System.ComponentModel.Description("Filter by regex. If empty, all logs are returned.")]
+            [Description("Filter by regex. If empty, all logs are returned.")]
             string filter = "",
-            [System.ComponentModel.Description("Log count limit. Set to 0 for no limit(Not recommended).")]
+            [Description("Log count limit. Set to 0 for no limit(Not recommended).")]
             int maxCount = 10,
-            [System.ComponentModel.Description(
+            [Description("Get only first line of the log message. If false, the whole message is returned.(To save tokens, recommend calling this with true.)")]
+            bool onlyFirstLine = true,
+            [Description(
                 "If true, the logs will be sorted by time in chronological order(oldest first). If false, newest first.")]
             bool isChronological = false)
         {
@@ -75,7 +78,7 @@ namespace UnityNaturalMCP.Editor.McpTools
                     if ((string.IsNullOrEmpty(logTypeToLower) || logTypeValue.Equals(logTypeToLower))
                         && (string.IsNullOrEmpty(filter) || Regex.IsMatch(message, filter)))
                     {
-                        logs.Add(new LogEntry(message, logTypeValue));
+                        logs.Add(new LogEntry(onlyFirstLine ? message.Split('\n')[0] : message, logTypeValue));
                     }
                 }
 
@@ -97,7 +100,7 @@ namespace UnityNaturalMCP.Editor.McpTools
             }
         }
 
-        [McpServerTool, System.ComponentModel.Description("Clear console logs. It is recommended to call it before GetCurrentConsoleLogs.")]
+        [McpServerTool, Description("Clear console logs. It is recommended to call it before GetCurrentConsoleLogs.")]
         public async Task ClearConsoleLogs()
         {
             try
