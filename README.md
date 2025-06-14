@@ -75,11 +75,7 @@ You can install via UPM (Unity Package Manager):
 ![Preference](docs/images/preferences.png)
 
 ### Claude Code
-Clone the repository and start the server by passing `stdio-to-streamable-http/src/index.js` to `node`.
-
-You can specify the destination IP address and port through the `MCP_SERVER_IP` and `MCP_SERVER_PORT` environment variables.
-
-Use the following command to register an MCP server with ClaudeCode.
+Clone the repository and use the following command to register an MCP server with ClaudeCode.
 
 Replace path/to with the path to the cloned stdio-to-streamable-http.
 
@@ -94,6 +90,8 @@ claude mcp add-json unity-natural-mcp -s project '{
   }
 }'
 ```
+
+You can specify the destination IP address and port through the `MCP_SERVER_IP` and `MCP_SERVER_PORT` environment variables.
 
 ### WSL2
 When using MCP with Claude Code on Windows, you need to use WSL2.
