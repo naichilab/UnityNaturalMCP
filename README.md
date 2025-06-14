@@ -155,19 +155,6 @@ public class MyCustomMCPTool
 }
 ```
 
-> [!TIP]
-> When defining asynchronous processing, you need to consider the possibility of being called from threads other than the main thread.
-
-```csharp
-[McpServerTool, Description("Example of asynchronous processing")]
-public async UniTask<string> AsyncMethod()
-{
-    await UniTask.SwitchToMainThread();
-    await UniTask.Delay(1000);
-    return "Asynchronous processing completed";
-}
-```
-
 ### 2. Create MCP Tool Builder
 To register MCP tools with the MCP server, create a class that inherits from `McpBuilderScriptableObject`.
 ```csharp
@@ -190,6 +177,49 @@ public class MyCustomMCPToolBuilder : McpBuilderScriptableObject
 1. Right-click in the project window in Unity Editor
 2. Create ScriptableObject by Select `Create > UnityNaturalMCP > My Custom Tool Builder`
 3. From `Edit > Preferences > Unity Natural MCP > Refresh`, restart the MCP server to load the created tools.
+
+### Best practices for Custom MCP Tools
+
+#### MCPInspector
+From [MCP Inspector](https://github.com/modelcontextprotocol/inspector), you can call MCP tools via Streamable HTTP and perform operational verification smoothly.
+
+![MCPInspector](docs/images/mcp_inspector.png)
+
+#### Error Handling
+When errors occur within MCP tools, they are not displayed in logs.
+
+It is recommended to use try-catch blocks to log errors and rethrow them.
+
+```csharp
+[McpServerTool, Description("Example of error-returning process")]
+public async void ErrorMethod()
+{
+  try
+  {
+      throw new Exception("This is an error example");
+  }
+  catch (Exception e)
+  {
+      Debug.LogError(e);
+      throw;
+  }
+}
+```
+
+#### Asynchonous Processing
+When defining asynchronous processing, you need to consider the possibility of being called from threads other than the main thread.
+
+Additionally, the return type must use `Task<T>`.
+
+```csharp
+[McpServerTool, Description("Example of asynchronous processing")]
+public async Task<string> AsyncMethod()
+{
+    await UniTask.SwitchToMainThread();
+    await UniTask.Delay(1000);
+    return "非同期処理完了";
+}
+```
 
 ## License
 

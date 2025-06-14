@@ -154,19 +154,6 @@ public class MyCustomMCPTool
 }
 ```
 
-> [!TIP]
-> 非同期処理を定義する際は、メインスレッド以外から呼び出される可能性を考慮する必要があります。
-
-```csharp
-[McpServerTool, Description("非同期処理の例")]
-public async UniTask<string> AsyncMethod()
-{
-    await UniTask.SwitchToMainThread();
-    await UniTask.Delay(1000);
-    return "非同期処理完了";
-}
-```
-
 ### 2. Create MCP Tool Builder
 MCPツールをMCPサーバーに登録するためには、`McpBuilderScriptableObject`を継承したクラスを作成します。
 ```csharp
@@ -189,6 +176,49 @@ public class MyCustomMCPToolBuilder : McpBuilderScriptableObject
 1. Unity Editorでプロジェクトウィンドウを右クリック
 2. `Create > UnityNaturalMCP > My Custom Tool Builder` を選択してScriptableObjectを作成
 3. `Edit > Preferences > Unity Natural MCP > Refresh` から、MCPサーバーを再起動すると、作成したツールが読み込まれます。
+
+### Best practices for Custom MCP Tools
+
+#### MCPInspector
+MCPInspectorから、Streamable HTTPを介してMCPツールを呼び出し、動作確認をスムーズに行うことができます。
+
+![MCPInspector](docs/images/mcp_inspector.png)
+
+#### Error Handling
+MCPツール内でエラーが発生した場合、それはログに表示されません。
+
+try-catchブロックを使用して、エラーをログに記録し、再スローすることを推奨します。
+
+```csharp
+[McpServerTool, Description("エラーを返す処理の例")]
+public async void ErrorMethod()
+{
+  try
+  {
+      throw new Exception("This is an error example");
+  }
+  catch (Exception e)
+  {
+      Debug.LogError(e);
+      throw;
+  }
+}
+```
+
+#### Asynchonous Processing
+非同期処理を定義する際は、メインスレッド以外から呼び出される可能性を考慮する必要があります。
+
+また、戻り値の型には、 `Task<T>` を利用する必要があります。
+
+```csharp
+[McpServerTool, Description("非同期処理の例")]
+public async Task<string> AsyncMethod()
+{
+    await UniTask.SwitchToMainThread();
+    await UniTask.Delay(1000);
+    return "非同期処理完了";
+}
+```
 
 ## License
 
