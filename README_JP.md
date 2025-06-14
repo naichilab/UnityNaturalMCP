@@ -67,13 +67,14 @@ UPM(Unity Package Manager)を介してインストールできます。
   "jp.notargs.unity-natural-mcp": "https://github.com/notargs/UnityNaturalMCP.git?path=/UnityNaturalMCPServer#0.1.0"
   ```
 
-#### 初期設定
+#### Initial Setup
 1. Unity Editorで`Edit > Project Settings > Unity Natural MCP`を開く
 2. MCPサーバーのポート番号を設定（デフォルト: 8090）
 3. `Refresh` ボタンをクリックして設定を反映
 
 ### Claude Code
 RepositoryをCloneし、`node`に`stdio-to-streamable-http/src/index.js`を渡してサーバーを起動します。
+`MCP_SERVER_IP` `MCP_SERVER_PORT` 環境変数を介して、接続先のIPアドレスとポートを指定することができます。
 ```
 {
   "mcpServers": {
@@ -146,7 +147,7 @@ public async UniTask<string> AsyncMethod()
 }
 ```
 
-#### 2. Create MCP Tool Builder
+### 2. Create MCP Tool Builder
 MCPツールをMCPサーバーに登録するためには、`McpBuilderScriptableObject`を継承したクラスを作成します。
 ```csharp
 using UnityEngine;
@@ -164,7 +165,7 @@ public class MyCustomMCPToolBuilder : McpBuilderScriptableObject
 ```
 
 
-#### 3. ScriptableObjectの作成
+### 3. ScriptableObjectの作成
 1. Unity Editorでプロジェクトウィンドウを右クリック
 2. `Create > UnityFluxMCP > My Custom Tool Builder` を選択
 3. `Preferences > Unity Flux MCP > Refresh` から、MCPサーバーを再起動すると、作成したツールが読み込まれます。

@@ -74,6 +74,9 @@ You can install via UPM (Unity Package Manager):
 
 ### Claude Code
 Clone the repository and start the server by passing `stdio-to-streamable-http/src/index.js` to `node`.
+
+You can specify the destination IP address and port through the `MCP_SERVER_IP` and `MCP_SERVER_PORT` environment variables.
+
 ```
 {
   "mcpServers": {
@@ -146,7 +149,7 @@ public async UniTask<string> AsyncMethod()
 }
 ```
 
-#### 2. Create MCP Tool Builder
+### 2. Create MCP Tool Builder
 To register MCP tools with the MCP server, create a class that inherits from `McpBuilderScriptableObject`.
 ```csharp
 using UnityEngine;
@@ -164,7 +167,7 @@ public class MyCustomMCPToolBuilder : McpBuilderScriptableObject
 ```
 
 
-#### 3. Create ScriptableObject
+### 3. Create ScriptableObject
 1. Right-click in the project window in Unity Editor
 2. Select `Create > UnityFluxMCP > My Custom Tool Builder`
 3. From `Preferences > Unity Flux MCP > Refresh`, restart the MCP server to load the created tools.
