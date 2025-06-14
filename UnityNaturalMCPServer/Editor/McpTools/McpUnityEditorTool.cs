@@ -82,13 +82,14 @@ namespace UnityNaturalMCP.Editor.McpTools
                     }
                 }
 
-                if (isChronological)
+                if (!isChronological)
+                {
+                    logs = ((IEnumerable<LogEntry>)logs).Reverse().ToList();
+                }
+
+                if (maxCount > 0)
                 {
                     logs = logs.Take(maxCount).ToList();
-                }
-                else
-                {
-                    logs = ((IEnumerable<LogEntry>)logs).Reverse().Take(maxCount).ToList();
                 }
 
                 return logs;
