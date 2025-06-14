@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
@@ -110,7 +111,7 @@ namespace UnityNaturalMCP.Editor.McpTools
                 var logEntries = Type.GetType("UnityEditor.LogEntries,UnityEditor.dll");
                 Assert.IsNotNull(logEntries);
 
-                var clearMethod = logEntries.GetMethod("Clear");
+                var clearMethod = logEntries.GetMethod("Clear", BindingFlags.Public | BindingFlags.Static);
 
                 Assert.IsNotNull(clearMethod);
 
