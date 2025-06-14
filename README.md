@@ -9,7 +9,7 @@ MCP tools defined in Unity C# can be directly used from MCP clients such as Clau
 ## Features
 - Concise communication flow between Unity Editor and MCP clients
 - stdio/Streamable HTTP support
-- Implementation of extended MCP tools completed in C# using [ModelProtocolContext C# SDK](https://github.com/modelcontextprotocol/csharp-sdk)
+- Implementation of extended MCP tool entirely written in C# using [ModelProtocolContext C# SDK](https://github.com/modelcontextprotocol/csharp-sdk)
 - ClaudeCode support
 
 ## Architecture
