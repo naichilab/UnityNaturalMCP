@@ -42,7 +42,7 @@ stdioの入力をStreamable HTTPにバイパスすることで、UnityNaturalMCP
 
 ## Requirements
 - Unity 6000.0
-- Node.js
+- Node.js 18.0.0 or later
 
 ## Installation
 
