@@ -4,13 +4,13 @@
 
 UnityNaturalMCPは、"ナチュラル"な使い勝手を目指した、Unity向けのMCPサーバー実装です。
 
-Unity C#で定義したMCPツールを、ダイレクトにClaudeCodeやCursorなどのMCPクライアントから利用できます。
+Unity C#で定義したMCPツールを、ダイレクトにClaudeCodeやGitHub Copilot + VSCodeなどのMCPクライアントから利用できます。
 
 ## Features
 - Unity EditorとMCPクライアント間の簡潔な通信フロー
 - stdio/Streamable HTTP対応
 - [MCP C# SDK](https://github.com/modelcontextprotocol/csharp-sdk)を用いた、C#で完結する拡張MCPツールの実装
-- ClaudeCode対応
+- ClaudeCode, GitHub Copilot + VSCodeサポート
 
 ## Requirements
 - Unity 6000.0
@@ -92,7 +92,6 @@ claude mcp add-json unity-natural-mcp -s project '{
 
 `MCP_SERVER_IP` `MCP_SERVER_PORT` 環境変数を介して、接続先のIPアドレスとポートを指定することができます。
 
-
 ### WSL2
 Windows上でClaude Codeなどを用いてMCPを利用する場合、WSL2を利用する必要があります。
 
@@ -116,6 +115,21 @@ networkingMode=mirrored
 > セキュリティ上の観点から、IP Addressに`*`を指定することは本来推奨されません。
 > こちらはあくまで簡易的なセットアップ手順を示すものです。
 > 環境に応じて、適宜調整を行ってください。
+
+### VSCode + GitHub Copilot
+VSCode + GitHub Copilotを利用する場合、Streamable HTTPを介した接続が可能です。
+
+`.vscode/mcp.json` に次の設定を追加します。
+
+```json
+{
+  "servers": {
+    "unity-natural-mcp": {
+      "url": "http://localhost:8090/mcp"
+    }
+  }
+}
+```
 
 ## Custom MCP Tool Implementation
 

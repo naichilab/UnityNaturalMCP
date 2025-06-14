@@ -18,12 +18,12 @@ namespace UnityNaturalMCP.Editor
     internal sealed class McpServerApplication : IDisposable
     {
         private readonly HttpListener _httpListener = new();
-        
+
         public void Dispose()
         {
             _httpListener.Close();
         }
-        
+
         public async UniTask Run(CancellationToken token)
         {
             var preference = McpPreference.instance;
@@ -44,7 +44,7 @@ namespace UnityNaturalMCP.Editor
                     clientToServerPipe.Reader.AsStream(),
                     serverToClientPipe.Writer.AsStream())
                 .WithTools<McpUnityEditorTool>();
-            
+
             var mcpBuilderScriptableObjects = AssetDatabase.FindAssets("t:McpBuilderScriptableObject");
             foreach (var guid in mcpBuilderScriptableObjects)
             {
@@ -82,14 +82,14 @@ namespace UnityNaturalMCP.Editor
                     token.ThrowIfCancellationRequested();
                     // リクエスト取得
                     var context = await listener.GetContextAsync();
-                    var req = context.Request;
-                    var res = context.Response;
+                    var request = context.Request;
+                    var response = context.Response;
 
-                    switch (req.HttpMethod)
+                    switch (request.HttpMethod)
                     {
                         case "POST":
                         {
-                            using var inputReader = new StreamReader(req.InputStream, Encoding.UTF8);
+                            using var inputReader = new StreamReader(request.InputStream, Encoding.UTF8);
                             var inputBody = await inputReader.ReadLineAsync();
                             var inputBodyJson = JsonNode.Parse(inputBody);
                             if (inputBodyJson?["method"]?.ToString() != "notifications/initialized")
@@ -103,17 +103,16 @@ namespace UnityNaturalMCP.Editor
                                 var resultBody = Encoding.UTF8.GetString(buffer.ToArray());
                                 serverToClientPipe.Reader.AdvanceTo(buffer.End);
 
-                                res.ContentType = "application/json";
-                                await res.OutputStream.WriteAsync(Encoding.UTF8.GetBytes(resultBody + "\n"), token);
-                                res.Close();
+                                response.ContentType = "application/json";
+                                await response.OutputStream.WriteAsync(Encoding.UTF8.GetBytes(resultBody + "\n"),
+                                    token);
                             }
+                            response.Close();
 
                             break;
                         }
                         case "GET":
                         {
-                            var response = context.Response;
-
                             var text = Encoding.UTF8.GetBytes(@"{
     ""jsonrpc"": ""2.0"",
     ""error"": {
