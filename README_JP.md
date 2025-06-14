@@ -67,7 +67,7 @@ UPM(Unity Package Manager)を介してインストールできます。
   "jp.notargs.unity-natural-mcp": "https://github.com/notargs/UnityNaturalMCP.git?path=/UnityNaturalMCPServer#0.1.0"
   ```
 
-#### Initial Setup
+### Initial Setup
 1. Unity Editorで`Edit > Project Settings > Unity Natural MCP`を開く
 2. MCPサーバーのポート番号を設定（デフォルト: 8090）
 3. `Refresh` ボタンをクリックして設定を反映
