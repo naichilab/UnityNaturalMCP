@@ -120,6 +120,9 @@ To work around this, set the IP Address to `*` in Unity's `Edit Preferences > Un
 
 ### 1. Create MCP Tool
 In UnityNaturalMCP, you can implement MCP tools in C# using the [ModelProtocolContext C# SDK](https://github.com/modelcontextprotocol/csharp-sdk).
+
+Create an asmdef for the Editor and add the following script files.
+
 ```csharp
 using UnityEngine;
 using UnityNaturalMCP.Editor.Attributes;
