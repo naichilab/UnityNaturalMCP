@@ -1,43 +1,135 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using ModelContextProtocol.Server;
 using UnityEditor;
 using UnityEngine;
+using Assert = UnityEngine.Assertions.Assert;
 
 namespace UnityNaturalMCP.Editor.McpTools
 {
-    [McpServerToolType, Description("Control Unity Editor tools")]
+    [McpServerToolType, System.ComponentModel.Description("Control Unity Editor tools")]
     internal sealed class McpUnityEditorTool
     {
-        [McpServerTool, Description("Execute AssetDatabase.Refresh")]
+        [McpServerTool, System.ComponentModel.Description("Execute AssetDatabase.Refresh")]
         public async UniTask RefreshAssets()
         {
-            await UniTask.SwitchToMainThread();
-            AssetDatabase.Refresh();
-        }
-        [McpServerTool, Description("Get log history.")]
-        public IReadOnlyList<LogEntry> GetLogHistory(
-            [Description("Filter logs by type. Valid values: \"All\", \"Error\", \"Assert\", \"Warning\", \"Exception\"")]
-            string logType)
-        {
-            if (logType.ToLower() == "all")
+            try
             {
-                return LogCollector.LogHistory;
+                await UniTask.SwitchToMainThread();
+                AssetDatabase.Refresh();
             }
-
-            var logTypeEnum = logType.ToLower() switch
+            catch (Exception e)
             {
-                "error" => LogType.Error,
-                "assert" => LogType.Assert,
-                "warning" => LogType.Warning,
-                "log" => LogType.Log,
-                "exception" => LogType.Exception,
-                _ => throw new ArgumentOutOfRangeException(nameof(logType), logType, null)
-            };
-
-            return LogCollector.GetLogHistory(logTypeEnum);
+                Debug.LogError(e);
+                throw;
+            }
         }
+
+        [McpServerTool, System.ComponentModel.Description("Get current console logs. Recommend calling ClearConsoleLogs beforehand.")]
+        public async Task<IReadOnlyList<LogEntry>> GetCurrentConsoleLogs(
+            [System.ComponentModel.Description(
+                "Filter logs by type. Valid values: \"\"(Maches all logs), \"error\", \"warning\", \"log\", \"compile-error\"(This is all you need to check for compilation errors.), \"compile-warning\"")]
+            string logType = "",
+            [System.ComponentModel.Description(
+                "Include stack trace in the log entries. Recommended is false.(Recommend using a filter to set this to true only if you want to investigate further.)")]
+            bool includeStackTrace = false,
+            [System.ComponentModel.Description("Filter by regex. If empty, all logs are returned.")]
+            string filter = "",
+            [System.ComponentModel.Description("Log count limit. Set to 0 for no limit(Not recommended).")]
+            int maxCount = 10,
+            [System.ComponentModel.Description(
+                "If true, the logs will be sorted by time in chronological order(oldest first). If false, newest first.")]
+            bool isChronological = false)
+        {
+            try
+            {
+                await UniTask.SwitchToMainThread();
+                var logTypeToLower = logType.ToLower();
+                var logs = new List<LogEntry>();
+                var logEntries = Type.GetType("UnityEditor.LogEntries,UnityEditor.dll");
+                Assert.IsNotNull(logEntries);
+
+                var getCountMethod = logEntries.GetMethod("GetCount");
+                var getEntryInternalMethod = logEntries.GetMethod("GetEntryInternal");
+
+                Assert.IsNotNull(getCountMethod);
+                Assert.IsNotNull(getEntryInternalMethod);
+
+                var count = (int)getCountMethod.Invoke(null, null);
+
+                for (var i = 0; i < count; i++)
+                {
+                    var logEntryType = Type.GetType("UnityEditor.LogEntry,UnityEditor.dll");
+                    Assert.IsNotNull(logEntryType);
+
+                    var logEntry = Activator.CreateInstance(logEntryType);
+
+                    getEntryInternalMethod.Invoke(null, new[] { i, logEntry });
+
+                    var message = logEntry.GetType().GetField("message").GetValue(logEntry) as string ?? "";
+                    var file = logEntry.GetType().GetField("file").GetValue(logEntry) as string ?? "";
+                    var mode = (int)logEntry.GetType().GetField("mode").GetValue(logEntry);
+                    var logTypeValue = UnityInternalLogModeToLogType(mode);
+
+                    if ((string.IsNullOrEmpty(logTypeToLower) || logTypeValue.Equals(logTypeToLower))
+                        && (string.IsNullOrEmpty(filter) || Regex.IsMatch(message, filter)))
+                    {
+                        logs.Add(new LogEntry(message, includeStackTrace ? file : "", logTypeValue));
+                    }
+                }
+
+                if (isChronological)
+                {
+                    logs = logs.Take(maxCount).ToList();
+                }
+                else
+                {
+                    logs = ((IEnumerable<LogEntry>)logs).Reverse().Take(maxCount).ToList();
+                }
+
+                return logs;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                throw;
+            }
+        }
+
+        [McpServerTool, System.ComponentModel.Description("Clear console logs. It is recommended to call it before GetCurrentConsoleLogs.")]
+        public async Task ClearConsoleLogs()
+        {
+            try
+            {
+                await UniTask.SwitchToMainThread();
+                var logEntries = Type.GetType("UnityEditor.LogEntries,UnityEditor.dll");
+                Assert.IsNotNull(logEntries);
+
+                var clearMethod = logEntries.GetMethod("Clear");
+
+                Assert.IsNotNull(clearMethod);
+
+                clearMethod.Invoke(null, null);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                throw;
+            }
+        }
+
+        private string UnityInternalLogModeToLogType(int mode) => mode switch
+        {
+            _ when (mode & (int)LogMessageFlags.ScriptingError) != 0 => "error",
+            _ when (mode & (int)LogMessageFlags.ScriptingWarning) != 0 => "warning",
+            _ when (mode & (int)LogMessageFlags.ScriptingLog) != 0 => "log",
+            _ when (mode & (int)LogMessageFlags.ScriptCompileError) != 0 => "compile-error",
+            _ when (mode & (int)LogMessageFlags.ScriptCompileWarning) != 0 => "compile-warning",
+            _ => "unknown"
+        };
     }
 }
