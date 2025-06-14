@@ -118,6 +118,9 @@ networkingMode=mirrored
 
 ### 1. Create MCP Tool
 UnityNaturalMCPでは、[ModelProtocolContext C#SDK](https://github.com/modelcontextprotocol/csharp-sdk)を用いて、C#でMCPツールを実装することができます。
+
+Editor用のasmdefを作成し、次のスクリプトファイルを追加します。
+
 ```csharp
 using UnityEngine;
 using UnityNaturalMCP.Editor.Attributes;
