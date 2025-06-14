@@ -207,7 +207,7 @@ public async void ErrorMethod()
 ```
 
 #### Asynchonous Processing
-When defining asynchronous processing, you need to consider the possibility of being called from threads other than the main thread.
+When using Unity's API, it is necessary to consider the possibility that it may be called from threads other than the main thread.
 
 Additionally, the return type must use `Task<T>`.
 
