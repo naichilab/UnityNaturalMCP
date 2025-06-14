@@ -13,7 +13,8 @@ Unity C#で定義したMCPツールを、ダイレクトにClaudeCodeやCursor�
 - ClaudeCode対応
 
 ## Architecture
-```graph LR
+```mermaid
+graph LR
 A[MCP Client] ---|stdio| B[stdio-to-streamable-http]
 B ---|Streamable HTTP| C[UnityNaturalMCPServer]
 ```

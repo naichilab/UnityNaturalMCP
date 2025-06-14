@@ -13,7 +13,8 @@ MCP tools defined in Unity C# can be directly used from MCP clients such as Clau
 - ClaudeCode support
 
 ## Architecture
-```graph LR
+```mermaid
+graph LR
 A[MCP Client] ---|stdio| B[stdio-to-streamable-http]
 B ---|Streamable HTTP| C[UnityNaturalMCPServer]
 ```
