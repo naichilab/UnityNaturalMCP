@@ -53,8 +53,8 @@ namespace UnityNaturalMCP.Editor.McpTools
                 var logEntries = Type.GetType("UnityEditor.LogEntries,UnityEditor.dll");
                 Assert.IsNotNull(logEntries);
 
-                var getCountMethod = logEntries.GetMethod("GetCount");
-                var getEntryInternalMethod = logEntries.GetMethod("GetEntryInternal");
+                var getCountMethod = logEntries.GetMethod("GetCount", BindingFlags.Public | BindingFlags.Static);
+                var getEntryInternalMethod = logEntries.GetMethod("GetEntryInternal", BindingFlags.Public | BindingFlags.Static);
 
                 Assert.IsNotNull(getCountMethod);
                 Assert.IsNotNull(getEntryInternalMethod);
