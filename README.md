@@ -1,6 +1,6 @@
 # UnityNaturalMCP
 
-[日本語](README_JP.md)
+[日本語](README.ja.md)
 
 UnityNaturalMCP is an MCP server implementation for Unity that aims for a "natural" user experience.
 
