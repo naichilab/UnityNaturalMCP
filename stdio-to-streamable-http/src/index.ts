@@ -2,6 +2,7 @@
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
+import type { CallToolRequest, ListToolsRequest } from "@modelcontextprotocol/sdk/types.js";
 
 const MCP_SERVER_IP = process.env.MCP_SERVER_IP || "localhost";
 const MCP_SERVER_PORT = process.env.MCP_SERVER_PORT || "8090";
@@ -44,7 +45,7 @@ server.setRequestHandler(
         return { tools: [] };
       }
       
-      const jsonRpcResponse = await response.json();
+      const jsonRpcResponse = await response.json() as any;
       
       if (jsonRpcResponse.error) {
         console.error("JSON-RPC error:", jsonRpcResponse.error);
@@ -61,7 +62,7 @@ server.setRequestHandler(
 
 server.setRequestHandler(
   CallToolRequestSchema,
-  async (request) => {
+  async (request: CallToolRequest) => {
     try {
       const jsonRpcRequest = {
         jsonrpc: "2.0",
@@ -97,7 +98,7 @@ server.setRequestHandler(
       }
       
       try {
-        const jsonRpcResponse = JSON.parse(responseBody);
+        const jsonRpcResponse = JSON.parse(responseBody) as any;
         
         if (jsonRpcResponse.error) {
           return {
