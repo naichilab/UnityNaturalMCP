@@ -75,9 +75,7 @@ UPM(Unity Package Manager)を介してインストールできます。
 ![Preference](docs/images/preferences.png)
 
 ### Claude Code
-RepositoryをCloneし、`node`に`stdio-to-streamable-http/src/index.js`を渡してサーバーを起動します。
-
-次のコマンドを利用して、ClaudeCodeにMCPサーバーを登録します。
+RepositoryをCloneし、次のコマンドを利用して、ClaudeCodeにMCPサーバーを登録します。
 
 `path/to` は、Cloneした `stdio-to-streamable-http` のパスに置き換えてください。
 ```shell
