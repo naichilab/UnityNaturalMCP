@@ -172,7 +172,7 @@ public class MyCustomMCPToolBuilder : McpBuilderScriptableObject
 
 ### 3. Create ScriptableObject
 1. Right-click in the project window in Unity Editor
-2. Select `Create > UnityNaturalMCP > My Custom Tool Builder`
+2. Create ScriptableObject by Select `Create > UnityNaturalMCP > My Custom Tool Builder`
 3. From `Edit > Preferences > Unity Natural MCP > Refresh`, restart the MCP server to load the created tools.
 
 ## License
