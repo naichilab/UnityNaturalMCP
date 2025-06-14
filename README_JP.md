@@ -9,7 +9,7 @@ Unity C#で定義したMCPツールを、ダイレクトにClaudeCodeやCursor�
 ## Features
 - Unity EditorとMCPクライアント間の簡潔な通信フロー
 - stdio/Streamable HTTP対応
-- [ModelProtocolContext C#SDK](https://github.com/modelcontextprotocol/csharp-sdk)を用いた、C#で完結する拡張MCPツールの実装
+- [MCP C# SDK](https://github.com/modelcontextprotocol/csharp-sdk)を用いた、C#で完結する拡張MCPツールの実装
 - ClaudeCode対応
 
 ## Architecture
