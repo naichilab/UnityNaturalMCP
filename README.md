@@ -10,7 +10,7 @@ MCP tools defined in Unity C# can be directly used from MCP clients such as Clau
 - Concise communication flow between Unity Editor and MCP clients
 - stdio/Streamable HTTP support
 - Implementation of extended MCP tool entirely written in C# using [MCP C# SDK](https://github.com/modelcontextprotocol/csharp-sdk)
-- ClaudeCode support
+- ClaudeCode, GitHub Copilot + VSCode support
 
 ## Requirements
 - Unity 6000.0
@@ -116,6 +116,21 @@ To work around this, set the IP Address to `*` in Unity's `Edit Preferences > Un
 > From a security perspective, specifying `*` for the IP Address is not normally recommended.
 > This is only meant to show a simplified setup procedure.
 > Please adjust accordingly based on your environment.
+
+### VSCode + GitHub Copilot
+When using VSCode + GitHub Copilot, connection via Streamable HTTP is possible.
+
+Add the following configuration to `.vscode/mcp.json`:
+
+```json
+{
+  "servers": {
+    "unity-natural-mcp": {
+      "url": "http://localhost:8090/mcp"
+    }
+  }
+}
+```
 
 ## Custom MCP Tool Implementation
 
