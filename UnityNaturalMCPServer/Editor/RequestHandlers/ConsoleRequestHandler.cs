@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Net;
 using Cysharp.Threading.Tasks;
-using UnityFluxMCP.Editor.Managers;
+using UnityNaturalMCP.Editor.Managers;
 
-namespace UnityFluxMCP.Editor.RequestHandlers
+namespace UnityNaturalMCP.Editor.RequestHandlers
 {
     public class ConsoleRequestHandler : BaseRequestHandler
     {

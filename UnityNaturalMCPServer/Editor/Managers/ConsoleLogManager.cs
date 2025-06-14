@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace UnityFluxMCP.Editor.Managers
+namespace UnityNaturalMCP.Editor.Managers
 {
     public class ConsoleLogManager
     {

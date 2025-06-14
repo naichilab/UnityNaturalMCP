@@ -2,11 +2,11 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace UnityFluxMCP.Editor
+namespace UnityNaturalMCP.Editor
 {
     internal class McpPreferenceProvider : SettingsProvider
     {
-        private const string SettingPath = "Preferences/Unity Flux MCP";
+        private const string SettingPath = "Preferences/Unity Natural MCP";
         private readonly UnityEditor.Editor _preferenceEditor;
 
         [SettingsProvider]

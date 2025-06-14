@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using System.Text.Json;
 
-namespace UnityFluxMCP.Editor.RequestHandlers
+namespace UnityNaturalMCP.Editor.RequestHandlers
 {
     public abstract class BaseRequestHandler : IRequestHandler
     {

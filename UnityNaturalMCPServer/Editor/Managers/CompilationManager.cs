@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
 
-namespace UnityFluxMCP.Editor.Managers
+namespace UnityNaturalMCP.Editor.Managers
 {
     /// <summary>
     /// Unity プロジェクトのコンパイルを管理するシンプルなマネージャー

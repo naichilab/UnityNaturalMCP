@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace UnityFluxMCP.Editor.McpTools
+namespace UnityNaturalMCP.Editor.McpTools
 {
     internal static class LogCollector
     {

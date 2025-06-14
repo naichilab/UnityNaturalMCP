@@ -6,7 +6,7 @@ using ModelContextProtocol.Server;
 using UnityEditor;
 using UnityEngine;
 
-namespace UnityFluxMCP.Editor.McpTools
+namespace UnityNaturalMCP.Editor.McpTools
 {
     [McpServerToolType, Description("Control Unity Editor tools")]
     internal sealed class McpUnityEditorTool

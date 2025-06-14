@@ -1,9 +1,9 @@
 using System.Net;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityFluxMCP.Editor.Managers;
+using UnityNaturalMCP.Editor.Managers;
 
-namespace UnityFluxMCP.Editor.RequestHandlers
+namespace UnityNaturalMCP.Editor.RequestHandlers
 {
     public class ProjectRequestHandler : BaseRequestHandler
     {

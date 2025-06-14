@@ -11,9 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using ModelContextProtocol.Server;
 using UnityEditor;
 using UnityEngine;
-using UnityFluxMCP.Editor.McpTools;
+using UnityNaturalMCP.Editor.McpTools;
 
-namespace UnityFluxMCP.Editor
+namespace UnityNaturalMCP.Editor
 {
     internal sealed class McpServerApplication : IDisposable
     {

@@ -2,9 +2,9 @@
 using Cysharp.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
-using UnityFluxMCP.Editor.McpTools;
+using UnityNaturalMCP.Editor.McpTools;
 
-namespace UnityFluxMCP.Editor
+namespace UnityNaturalMCP.Editor
 {
     internal static class McpServerRunner
     {

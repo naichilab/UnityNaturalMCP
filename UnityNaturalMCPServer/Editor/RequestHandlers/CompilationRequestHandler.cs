@@ -1,8 +1,8 @@
 using System.Net;
 using System.Text.Json;
-using UnityFluxMCP.Editor.Managers;
+using UnityNaturalMCP.Editor.Managers;
 
-namespace UnityFluxMCP.Editor.RequestHandlers
+namespace UnityNaturalMCP.Editor.RequestHandlers
 {
     public class CompilationRequestHandler : BaseRequestHandler
     {

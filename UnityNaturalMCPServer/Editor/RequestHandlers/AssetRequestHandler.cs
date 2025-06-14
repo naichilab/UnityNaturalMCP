@@ -5,7 +5,7 @@ using Cysharp.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
-namespace UnityFluxMCP.Editor.RequestHandlers
+namespace UnityNaturalMCP.Editor.RequestHandlers
 {
     public class AssetRequestHandler : BaseRequestHandler
     {

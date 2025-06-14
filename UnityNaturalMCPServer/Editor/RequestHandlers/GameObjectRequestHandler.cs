@@ -3,7 +3,7 @@ using System.Net;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace UnityFluxMCP.Editor.RequestHandlers
+namespace UnityNaturalMCP.Editor.RequestHandlers
 {
     public class GameObjectRequestHandler : BaseRequestHandler
     {

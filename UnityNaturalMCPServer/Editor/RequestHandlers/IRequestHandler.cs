@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace UnityFluxMCP.Editor.RequestHandlers
+namespace UnityNaturalMCP.Editor.RequestHandlers
 {
     public interface IRequestHandler
     {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using UnityEngine;
-using UnityFluxMCP.Editor;
+using UnityNaturalMCP.Editor;
 
 namespace Editor
 {
-    [CreateAssetMenu(fileName = "ExampleMCPToolBuilder", menuName = "UnityFluxMCP/Example MCP Tool Builder", order = 1)]
+    [CreateAssetMenu(fileName = "ExampleMCPToolBuilder", menuName = "UnityNaturalMCP/Example MCP Tool Builder", order = 1)]
     internal sealed class ExampleMCPToolBuilder : McpBuilderScriptableObject
     {
         public override void Build(IMcpServerBuilder builder)
