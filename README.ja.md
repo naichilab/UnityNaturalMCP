@@ -72,23 +72,26 @@ UPM(Unity Package Manager)を介してインストールできます。
 2. MCPサーバーのポート番号を設定（デフォルト: 8090）
 3. `Refresh` ボタンをクリックして設定を反映
 
+![Preference](docs/images/preferences.png)
+
 ### Claude Code
 RepositoryをCloneし、`node`に`stdio-to-streamable-http/src/index.js`を渡してサーバーを起動します。
-`MCP_SERVER_IP` `MCP_SERVER_PORT` 環境変数を介して、接続先のIPアドレスとポートを指定することができます。
+
+次のコマンドを利用して、ClaudeCodeにMCPサーバーを登録します。
 ```
-{
-  "mcpServers": {
-    "unity-natural-mcp": {
-      "command": "node",
-      "args": ["path/to/stdio-to-streamable-http/src/index.js"],
-      "env": {
-        "MCP_SERVER_IP": "localhost",
-        "MCP_SERVER_PORT": "8090"
-      }
-    }
+claude mcp add-json unity-natural-mcp -s project '{
+  "type":"stdio",
+  "command": "npm",
+  "args": ["start", "--prefix", "../stdio-to-streamable-http/"],
+  "env": {
+    "MCP_SERVER_IP": "localhost",
+    "MCP_SERVER_PORT": "8090"
   }
-}
+}'
 ```
+
+`MCP_SERVER_IP` `MCP_SERVER_PORT` 環境変数を介して、接続先のIPアドレスとポートを指定することができます。
+
 
 ### WSL2
 Windows上でClaude Codeなどを用いてMCPを利用する場合、WSL2を利用する必要があります。
