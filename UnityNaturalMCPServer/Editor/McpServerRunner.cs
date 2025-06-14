@@ -22,8 +22,10 @@ namespace UnityNaturalMCP.Editor
 
             AssemblyReloadEvents.beforeAssemblyReload += () =>
             {
-                cancellationTokenSource.Cancel();
-                _mcpServerApplication.Dispose();
+                _cancellationTokenSource?.Cancel();
+                _mcpServerApplication?.Dispose();
+                cancellationTokenSource = null;
+                _mcpServerApplication = null;
             };
         }
 
@@ -32,7 +34,7 @@ namespace UnityNaturalMCP.Editor
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource = new CancellationTokenSource();
 
-            _mcpServerApplication.Dispose();
+            _mcpServerApplication?.Dispose();
             _mcpServerApplication = new McpServerApplication();
             _mcpServerApplication.Run(_cancellationTokenSource.Token).Forget();
         }
