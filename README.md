@@ -224,7 +224,7 @@ public async Task<string> AsyncMethod()
 {
     await UniTask.SwitchToMainThread();
     await UniTask.Delay(1000);
-    return "非同期処理完了";
+    return "Finished async processing";
 }
 ```
 
