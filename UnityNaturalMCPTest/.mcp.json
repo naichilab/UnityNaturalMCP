@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "unity-flux-mcp": {
+      "command": "node",
+      "args": ["../stdio-to-streamable-http/src/index.js"],
+      "env": {
+        "MCP_SERVER_IP": "localhost",
+        "MCP_SERVER_PORT": "8090"
+      }
+    }
+  }
+}

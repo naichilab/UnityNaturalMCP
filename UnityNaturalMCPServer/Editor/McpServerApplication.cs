@@ -1,0 +1,138 @@
+using System;
+using System.Buffers;
+using System.IO;
+using System.IO.Pipelines;
+using System.Net;
+using System.Text;
+using System.Text.Json.Nodes;
+using System.Threading;
+using Cysharp.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using ModelContextProtocol.Server;
+using UnityEditor;
+using UnityEngine;
+using UnityFluxMCP.Editor.McpTools;
+
+namespace UnityFluxMCP.Editor
+{
+    internal sealed class McpServerApplication : IDisposable
+    {
+        private readonly HttpListener _httpListener = new();
+        
+        public void Dispose()
+        {
+            _httpListener.Close();
+        }
+        
+        public async UniTask Run(CancellationToken token)
+        {
+            var preference = McpPreference.instance;
+            var mcpEntPoint = $"http://{preference.ipAddress}:{preference.port}/mcp/";
+            _httpListener.Prefixes.Add(mcpEntPoint);
+            _httpListener.Start();
+            if (preference.showMcpServerLog)
+            {
+                Debug.Log($"Started MCP server at {mcpEntPoint}");
+            }
+
+            Pipe clientToServerPipe = new();
+            Pipe serverToClientPipe = new();
+
+            var builder = new ServiceCollection()
+                .AddMcpServer()
+                .WithStreamServerTransport(
+                    clientToServerPipe.Reader.AsStream(),
+                    serverToClientPipe.Writer.AsStream())
+                .WithTools<McpUnityEditorTool>();
+            
+            var mcpBuilderScriptableObjects = AssetDatabase.FindAssets("t:McpBuilderScriptableObject");
+            foreach (var guid in mcpBuilderScriptableObjects)
+            {
+                var path = AssetDatabase.GUIDToAssetPath(guid);
+                var scriptableObject = AssetDatabase.LoadAssetAtPath<McpBuilderScriptableObject>(path);
+                if (scriptableObject != null)
+                {
+                    scriptableObject.Build(builder);
+                    if (preference.showMcpServerLog)
+                    {
+                        Debug.Log($"Loaded MCP tool builder: {scriptableObject.name}");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"Failed to load MCP tool builder at path: {path}");
+                }
+            }
+
+            await using var services = builder.Services.BuildServiceProvider();
+
+            HandleHttpRequestAsync(_httpListener, clientToServerPipe, serverToClientPipe, token).Forget();
+
+            var mcpServer = services.GetRequiredService<IMcpServer>();
+            await mcpServer.RunAsync(token);
+        }
+
+        private static async UniTask HandleHttpRequestAsync(HttpListener listener, Pipe clientToServerPipe,
+            Pipe serverToClientPipe, CancellationToken token)
+        {
+            try
+            {
+                while (true)
+                {
+                    token.ThrowIfCancellationRequested();
+                    // リクエスト取得
+                    var context = await listener.GetContextAsync();
+                    var req = context.Request;
+                    var res = context.Response;
+
+                    switch (req.HttpMethod)
+                    {
+                        case "POST":
+                        {
+                            using var inputReader = new StreamReader(req.InputStream, Encoding.UTF8);
+                            var inputBody = await inputReader.ReadLineAsync();
+                            var inputBodyJson = JsonNode.Parse(inputBody);
+                            if (inputBodyJson?["method"]?.ToString() != "notifications/initialized")
+                            {
+                                await clientToServerPipe.Writer.WriteAsync(Encoding.UTF8.GetBytes(inputBody + "\n"),
+                                    token);
+
+                                var result = await serverToClientPipe.Reader.ReadAsync(token);
+                                var buffer = result.Buffer;
+
+                                var resultBody = Encoding.UTF8.GetString(buffer.ToArray());
+                                serverToClientPipe.Reader.AdvanceTo(buffer.End);
+
+                                res.ContentType = "application/json";
+                                await res.OutputStream.WriteAsync(Encoding.UTF8.GetBytes(resultBody + "\n"), token);
+                                res.Close();
+                            }
+
+                            break;
+                        }
+                        case "GET":
+                        {
+                            var response = context.Response;
+
+                            var text = Encoding.UTF8.GetBytes(@"{
+    ""jsonrpc"": ""2.0"",
+    ""error"": {
+        ""code"": -32000,
+        ""message"": ""Method not allowed.""
+    },
+    ""id"": null
+}");
+                            await response.OutputStream.WriteAsync(text, 0, text.Length, token);
+                            response.Close();
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (ObjectDisposedException)
+            {
+                // Ignore for cancellation
+            }
+        }
+    }
+}
