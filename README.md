@@ -49,7 +49,8 @@ A Unity project for functional verification and as a sample.
 Currently, the following MCP tools are implemented:
 
 - **RefreshAssets**: Refresh Unity Editor assets
-- **GetLogHistory**: Get Unity Console log history
+- **GetCurrentConsoleLogs**: Get Unity Console log history
+- **ClearConsoleLogs**: Clear Unity Console logs
 
 ## Installation
 

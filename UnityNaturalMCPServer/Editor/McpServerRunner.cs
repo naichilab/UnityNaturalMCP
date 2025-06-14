@@ -14,7 +14,6 @@ namespace UnityNaturalMCP.Editor
         [InitializeOnLoadMethod]
         private static void Init()
         {
-            LogCollector.Initialize();
             var cancellationTokenSource = new CancellationTokenSource();
             cancellationTokenSource.AddTo(Application.exitCancellationToken);
             _mcpServerApplication = new McpServerApplication();
