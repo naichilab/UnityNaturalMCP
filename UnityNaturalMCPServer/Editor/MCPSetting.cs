@@ -2,7 +2,7 @@
 
 namespace UnityNaturalMCP.Editor
 {
-    [FilePath("UnityNaturalMCPSetting.asset", FilePathAttribute.Location.ProjectFolder)]
+    [FilePath("ProjectSettings/UnityNaturalMCPSetting.asset", FilePathAttribute.Location.ProjectFolder)]
     public sealed class MCPSetting : ScriptableSingleton<MCPSetting>
     {
         public string ipAddress = "localhost";
