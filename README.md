@@ -217,11 +217,11 @@ public async void ErrorMethod()
 #### Asynchonous Processing
 When using Unity's API, it is necessary to consider the possibility that it may be called from threads other than the main thread.
 
-Additionally, the return type must use `Task<T>`.
+Additionally, the return type must use `ValueTask<T>`.
 
 ```csharp
 [McpServerTool, Description("Example of asynchronous processing")]
-public async Task<string> AsyncMethod()
+public async ValueTask<string> AsyncMethod()
 {
     await UniTask.SwitchToMainThread();
     await UniTask.Delay(1000);

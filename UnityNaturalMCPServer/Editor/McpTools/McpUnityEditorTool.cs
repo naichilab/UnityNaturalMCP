@@ -17,7 +17,7 @@ namespace UnityNaturalMCP.Editor.McpTools
     internal sealed class McpUnityEditorTool
     {
         [McpServerTool, Description("Execute AssetDatabase.Refresh")]
-        public async UniTask RefreshAssets()
+        public async ValueTask RefreshAssets()
         {
             try
             {
@@ -32,7 +32,7 @@ namespace UnityNaturalMCP.Editor.McpTools
         }
 
         [McpServerTool, Description("Get current console logs. Recommend calling ClearConsoleLogs beforehand.")]
-        public async Task<IReadOnlyList<LogEntry>> GetCurrentConsoleLogs(
+        public async ValueTask<IReadOnlyList<LogEntry>> GetCurrentConsoleLogs(
             [Description(
                 "Filter logs by type. Valid values: \"\"(Maches all logs), \"error\", \"warning\", \"log\", \"compile-error\"(This is all you need to check for compilation errors.), \"compile-warning\"")]
             string logType = "",
@@ -103,7 +103,7 @@ namespace UnityNaturalMCP.Editor.McpTools
         }
 
         [McpServerTool, Description("Clear console logs. It is recommended to call it before GetCurrentConsoleLogs.")]
-        public async Task ClearConsoleLogs()
+        public async ValueTask ClearConsoleLogs()
         {
             try
             {

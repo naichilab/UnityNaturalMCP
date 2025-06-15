@@ -216,11 +216,11 @@ public async void ErrorMethod()
 #### Asynchonous Processing
 UnityのAPIを利用する際は、メインスレッド以外から呼び出される可能性を考慮する必要があります。
 
-また、戻り値の型には、 `Task<T>` を利用する必要があります。
+また、戻り値の型には、 `ValueTask<T>` を利用する必要があります。
 
 ```csharp
 [McpServerTool, Description("非同期処理の例")]
-public async Task<string> AsyncMethod()
+public async ValueTask<string> AsyncMethod()
 {
     await UniTask.SwitchToMainThread();
     await UniTask.Delay(1000);
