@@ -148,9 +148,8 @@ In UnityNaturalMCP, you can implement MCP tools in C# using the [ModelProtocolCo
 Create an asmdef for the Editor and add the following script files.
 
 ```csharp
-using UnityEngine;
-using UnityNaturalMCP.Editor.Attributes;
 using System.ComponentModel;
+using ModelContextProtocol.Server;
 
 [McpServerToolType, Description("Description of custom MCP tool")]
 public class MyCustomMCPTool
@@ -166,6 +165,7 @@ public class MyCustomMCPTool
 ### 2. Create MCP Tool Builder
 To register MCP tools with the MCP server, create a class that inherits from `McpBuilderScriptableObject`.
 ```csharp
+using Microsoft.Extensions.DependencyInjection;
 using UnityEngine;
 using UnityNaturalMCP.Editor;
 

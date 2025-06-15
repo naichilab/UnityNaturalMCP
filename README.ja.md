@@ -147,9 +147,8 @@ UnityNaturalMCPでは、[ModelProtocolContext C#SDK](https://github.com/modelcon
 Editor用のasmdefを作成し、次のスクリプトファイルを追加します。
 
 ```csharp
-using UnityEngine;
-using UnityNaturalMCP.Editor.Attributes;
 using System.ComponentModel;
+using ModelContextProtocol.Server;
 
 [McpServerToolType, Description("カスタムMCPツールの説明")]
 public class MyCustomMCPTool
@@ -165,6 +164,7 @@ public class MyCustomMCPTool
 ### 2. Create MCP Tool Builder
 MCPツールをMCPサーバーに登録するためには、`McpBuilderScriptableObject`を継承したクラスを作成します。
 ```csharp
+using Microsoft.Extensions.DependencyInjection;
 using UnityEngine;
 using UnityNaturalMCP.Editor;
 
