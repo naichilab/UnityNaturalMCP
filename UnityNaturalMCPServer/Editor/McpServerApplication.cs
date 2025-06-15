@@ -26,7 +26,7 @@ namespace UnityNaturalMCP.Editor
 
         public async UniTask Run(CancellationToken token)
         {
-            var preference = McpPreference.instance;
+            var preference = MCPSetting.instance;
             var mcpEntPoint = $"http://{preference.ipAddress}:{preference.port}/mcp/";
             _httpListener.Prefixes.Add(mcpEntPoint);
             _httpListener.Start();

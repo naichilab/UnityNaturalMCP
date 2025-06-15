@@ -2,8 +2,8 @@
 
 namespace UnityNaturalMCP.Editor
 {
-    [FilePath("UnityNaturalMCPPreferences.asset", FilePathAttribute.Location.PreferencesFolder)]
-    public class McpPreference : ScriptableSingleton<McpPreference>
+    [FilePath("UnityNaturalMCPSetting.asset", FilePathAttribute.Location.ProjectFolder)]
+    public sealed class MCPSetting : ScriptableSingleton<MCPSetting>
     {
         public string ipAddress = "localhost";
         public int port = 8090;
