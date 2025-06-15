@@ -139,8 +139,25 @@ server.setRequestHandler(
 );
 
 async function main() {
+  // Send notifications/initialized handshake
+  const jsonRpcRequest = {
+    jsonrpc: "2.0",
+    method: "notifications/initialized",
+    params: {}
+  };
+  
+  // Ignore response
+  await fetch(MCP_SERVER_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(jsonRpcRequest),
+  });
+  
   const transport = new StdioServerTransport();
   await server.connect(transport);
+  
   console.error("MCP Server running on stdio");
 }
 
